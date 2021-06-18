@@ -40,9 +40,9 @@ namespace PluginsAPI
         protected void UnLoadPlugin()
         {
             Handler.PluginUnLoad(this);
-            if (Handler.OnUnload.Count != 0)
+            if (Handler.OnUnloadPlugin.Count != 0)
             {
-                foreach (Action unloadaction in Handler.OnUnload)
+                foreach (Action unloadaction in Handler.OnUnloadPlugin)
                 {
                     unloadaction();
                 }

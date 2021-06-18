@@ -1,6 +1,7 @@
 ﻿using PluginsAPI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -20,12 +21,20 @@ namespace Tests
             List<Action> actions = new List<Action>();
             actions.Add(Unload);
             client.OnUnload = actions;
-            client.PluginLoad(new PluginsAPI.Script(@"Test.cs"));
+            client.PluginLoad(new Script(@"Test.cs"));
             Console.ReadKey();
         }
         static void Unload()
         {
             Console.WriteLine("Плагин выключился");
+            StreamReader sr = new StreamReader("result.txt");
+            string line;
+            while (!sr.EndOfStream)
+            {
+                line = sr.ReadLine();
+                Console.WriteLine(line);
+            }
+            sr.Close();
         }
     }
 }
