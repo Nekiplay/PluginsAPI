@@ -25,6 +25,14 @@ namespace PluginsAPI
         protected void UnLoadPlugin(Plugin bot)
         {
             Handler.PluginUnLoad(bot);
+
+            if (Handler.OnUnloadPlugin != null && Handler.OnUnloadPlugin.Count != 0)
+            {
+                foreach (Action unloadaction in Handler.OnUnloadPlugin)
+                {
+                    unloadaction();
+                }
+            }
         }
         public void SetHandler(Client handler) { this._handler = handler; }
         private Plugin master = null;
@@ -40,14 +48,7 @@ namespace PluginsAPI
 
         protected void UnLoadPlugin()
         {
-            Handler.PluginUnLoad(this);
-            if (Handler.OnUnloadPlugin.Count != 0)
-            {
-                foreach (Action unloadaction in Handler.OnUnloadPlugin)
-                {
-                    unloadaction();
-                }
-            }
+            UnLoadPlugin(this);
         }
     }
 }

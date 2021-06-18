@@ -20,7 +20,7 @@ namespace Tests
             Client client = new Client();
             List<Action> actions = new List<Action>();
             actions.Add(Unload);
-            //client.OnUnloadPlugin = actions;
+            client.OnUnloadPlugin = actions;
             client.PluginLoad(new Script(@"Test.cs"));
             Console.ReadKey();
         }
