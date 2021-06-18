@@ -17,11 +17,22 @@ namespace PluginsAPI
         {
             this._handler = _handler;
         }
+        public void Stop()
+        {
+            if (netRead != null)
+            {
+                netRead.Abort();
+                netRead = null;
+            }
+        }
         public void StartUpdater()
         {
-            netRead = new Thread(new ThreadStart(Updater));
-            netRead.Name = "PacketHandler";
-            netRead.Start();
+            if (netRead == null)
+            {
+                netRead = new Thread(new ThreadStart(Updater));
+                netRead.Name = "PacketHandler";
+                netRead.Start();
+            }
         }
         private void Updater()
         {

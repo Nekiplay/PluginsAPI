@@ -33,6 +33,7 @@ namespace Tests
                 {
                     Console.WriteLine(obj);
                     test_plugin_client.PluginPostObject(s, "Привет плагин");
+                    updater.Stop();
                 }
             }
         }
