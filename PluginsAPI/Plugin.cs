@@ -28,6 +28,12 @@ namespace PluginsAPI
 
         public virtual void Initialize() { }
 
+        protected void RunScript(string filename, string playername = null, Dictionary<string, object> localVars = null)
+        {
+            Handler.PluginLoad(new Plugins.Script(filename, playername, localVars));
+        }
+
+
         protected void UnLoadPlugin()
         {
             Handler.PluginUnLoad(this);
