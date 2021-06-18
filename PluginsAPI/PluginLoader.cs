@@ -17,7 +17,7 @@ namespace PluginsAPI
         /// <summary>
         /// Run the specified C# script file
         /// </summary>
-        /// <param name="apiHandler">ChatBot handler for accessing ChatBot API</param>
+        /// <param name="apiHandler">ChatBot handler for accessing Plugin API</param>
         /// <param name="lines">Lines of the script file to run</param>
         /// <param name="args">Arguments to pass to the script</param>
         /// <param name="localVars">Local variables passed along with the script</param>
@@ -175,14 +175,5 @@ namespace PluginsAPI
         {
             base.LoadPlugin(bot);
         }
-
-        //public object CallScript(string script, string[] args)
-        //{
-        //    string[] lines = null;
-        //    Plugin.Script.LookForScript(ref script);
-        //    try { lines = File.ReadAllLines(script, Encoding.UTF8); }
-        //    catch (Exception e) { throw new CSharpException(CSErrorType.FileReadError, e); }
-        //    return CSharpRunner.Run(this, lines, args, localVars);
-        //}
     }
 }

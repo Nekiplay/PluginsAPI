@@ -13,25 +13,15 @@ namespace PluginsAPI
         private readonly List<Plugin> plugins = new List<Plugin>();
         public void PluginLoad(Plugin b, bool init = true)
         {
-            //if (InvokeRequired)
-            //{
-            //    InvokeOnMainThread(() => BotLoad(b, init));
-            //    return;
-            //}
-
             b.SetHandler(this);
             plugins.Add(b);
             if (init)
+            {
                 DispatchPluginEvent(bot => bot.Initialize(), new Plugin[] { b });
+            }
         }
         public void PluginUnLoad(Plugin b)
         {
-            //if (InvokeRequired)
-            //{
-            //    InvokeOnMainThread(() => BotUnLoad(b));
-            //    return;
-            //}
-
             plugins.RemoveAll(item => object.ReferenceEquals(item, b));
 
             // ToList is needed to avoid an InvalidOperationException from modfiying the list while it's being iterated upon.
@@ -79,19 +69,13 @@ namespace PluginsAPI
                         //Display a meaningful error message to help debugging the ChatBot
                         Console.WriteLine(parentMethodName + ": Got error from " + bot.ToString() + ": " + e.ToString());
                     }
-                    else throw; //ThreadAbortException should not be caught here as in can happen when disconnecting from server
+                    else throw;
                 }
             }
         }
         
         public void UnregisterPluginChannel(string channel, Plugin bot)
         {
-            //if (InvokeRequired)
-            //{
-            //    InvokeOnMainThread(() => UnregisterPluginChannel(channel, bot));
-            //    return;
-            //}
-
             if (registeredPluginsPluginChannels.ContainsKey(channel))
             {
                 List<Plugin> registeredBots = registeredPluginsPluginChannels[channel];
