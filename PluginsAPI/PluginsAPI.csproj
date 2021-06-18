@@ -46,9 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PluginLoader.cs" />
-    <Compile Include="Client.cs" />
+    <Compile Include="PluginClient.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Plugins\Script.cs" />
+    <Compile Include="PluginUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

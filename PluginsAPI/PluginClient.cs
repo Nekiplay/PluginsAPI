@@ -8,24 +8,21 @@ namespace PluginsAPI
 {
     public class PluginClient
     {
-        Thread netRead; // main thread
+        public PluginClient(PluginUpdater updater)
+        {
+            updater.SetHandler(this);
+            updater.StartUpdater();
+        }
         public PluginClient()
         {
-            StartUpdating();
+
         }
         public void Quit()
         {
-            netRead = null;
             foreach (Plugin p in plugins)
             {
                 PluginUnLoad(p);
             }
-        }
-        private void StartUpdating()
-        {
-            netRead = new Thread(new ThreadStart(Updater));
-            netRead.Name = "PacketHandler";
-            netRead.Start();
         }
         private readonly Dictionary<string, List<Plugin>> registeredPluginsPluginChannels = new Dictionary<string, List<Plugin>>();
         private readonly List<Plugin> plugins = new List<Plugin>();
@@ -37,37 +34,6 @@ namespace PluginsAPI
             {
                 return Type.GetType("Mono.Runtime") != null;
             }
-        }
-        private void Updater()
-        {
-            try
-            {
-                bool keepUpdating = true;
-                Stopwatch stopWatch = new Stopwatch();
-                while (keepUpdating)
-                {
-                    stopWatch.Start();
-                    keepUpdating = Update();
-                    stopWatch.Stop();
-                    int elapsed = stopWatch.Elapsed.Milliseconds;
-                    stopWatch.Reset();
-                    if (elapsed < 100)
-                        Thread.Sleep(100 - elapsed);
-                }
-            }
-            catch (System.IO.IOException) { }
-            catch (ObjectDisposedException) { }
-        }
-        private bool Update()
-        {
-            try
-            {
-                OnUpdate();
-
-            }
-            catch (System.IO.IOException) { return false; }
-            catch (NullReferenceException) { return false; }
-            return true;
         }
         public void OnUpdate()
         {

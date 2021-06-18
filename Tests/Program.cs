@@ -12,7 +12,8 @@ namespace Tests
 {
     static class Program
     {
-        static PluginClient client = new PluginClient();
+        static PluginUpdater updater = new PluginUpdater();
+        static PluginClient test_plugin_client = new PluginClient(updater);
         static Script s = new Script(@"Test.cs");
         /// <summary>
         /// Главная точка входа для приложения.
@@ -20,18 +21,18 @@ namespace Tests
         [STAThread]
         static void Main()
         {
-            client.OnPluginPostObject += OnPluginReceivedOnject;
-            client.PluginLoad(s);
+            test_plugin_client.OnPluginPostObject += OnPluginReceivedObject;
+            test_plugin_client.PluginLoad(s);
             Console.ReadKey();
         }
-        static void OnPluginReceivedOnject(object obj)
+        static void OnPluginReceivedObject(object obj)
         {
             if (obj.GetType() == typeof(string))
             {
                 if (obj == "Привет я плагин")
                 {
                     Console.WriteLine(obj);
-                    client.PluginPostObject(s, "Привет плагин");
+                    test_plugin_client.PluginPostObject(s, "Привет плагин");
                 }
             }
         }
