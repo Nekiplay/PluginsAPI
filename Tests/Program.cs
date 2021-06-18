@@ -17,8 +17,15 @@ namespace Tests
         static void Main()
         {
             Client client = new Client();
+            List<Action> actions = new List<Action>();
+            actions.Add(Unload);
+            client.OnUnload = actions;
             client.PluginLoad(new PluginsAPI.Script(@"Test.cs"));
             Console.ReadKey();
+        }
+        static void Unload()
+        {
+            Console.WriteLine("Плагин выключился");
         }
     }
 }

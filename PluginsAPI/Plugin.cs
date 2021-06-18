@@ -17,8 +17,14 @@ namespace PluginsAPI
                 throw new InvalidOperationException("Error");
             }
         }
-        protected void LoadPlugin(Plugin bot) { Handler.PluginUnLoad(bot); Handler.PluginLoad(bot); }
-        protected void UnLoadPlugin(Plugin bot) { Handler.PluginUnLoad(bot); }
+        protected void LoadPlugin(Plugin bot) 
+        { 
+            Handler.PluginUnLoad(bot); Handler.PluginLoad(bot); 
+        }
+        protected void UnLoadPlugin(Plugin bot)
+        {
+            Handler.PluginUnLoad(bot);
+        }
         public void SetHandler(Client handler) { this._handler = handler; }
         private Plugin master = null;
         protected void SetMaster(Plugin master) { this.master = master; }
@@ -34,6 +40,13 @@ namespace PluginsAPI
         protected void UnLoadPlugin()
         {
             Handler.PluginUnLoad(this);
+            if (Handler.OnUnload.Count != 0)
+            {
+                foreach (Action unloadaction in Handler.OnUnload)
+                {
+                    unloadaction();
+                }
+            }
         }
     }
 }

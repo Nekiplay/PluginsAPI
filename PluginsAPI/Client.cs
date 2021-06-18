@@ -9,6 +9,7 @@ namespace PluginsAPI
     {
         private readonly Dictionary<string, List<Plugin>> registeredPluginsPluginChannels = new Dictionary<string, List<Plugin>>();
         private readonly List<Plugin> plugins = new List<Plugin>();
+        public List<Action> OnUnload = null;
         public void PluginLoad(Plugin b, bool init = true)
         {
             b.SetHandler(this);
@@ -22,7 +23,6 @@ namespace PluginsAPI
         {
             plugins.RemoveAll(item => object.ReferenceEquals(item, b));
 
-            // ToList is needed to avoid an InvalidOperationException from modfiying the list while it's being iterated upon.
             var botRegistrations = registeredPluginsPluginChannels.Where(entry => entry.Value.Contains(b)).ToList();
             foreach (var entry in botRegistrations)
             {
