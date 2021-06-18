@@ -13,7 +13,6 @@ namespace PluginsAPI
         private string file;
         private string[] lines = new string[0];
         private string[] args = new string[0];
-        private int sleepticks = 10;
         private bool csharp;
         private Thread thread;
         private Dictionary<string, object> localVars;

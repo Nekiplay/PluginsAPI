@@ -13,10 +13,6 @@ namespace PluginsAPI
             updater.SetHandler(this);
             updater.StartUpdater();
         }
-        public PluginClient()
-        {
-
-        }
         public void Quit()
         {
             foreach (Plugin p in plugins)
