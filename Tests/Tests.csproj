@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PluginsAPI\PluginsAPI.csproj">
-      <Project>{02de83c5-407d-4f2e-92a9-f4d86ec9affc}</Project>
+      <Project>{02DE83C5-407D-4F2E-92A9-F4D86EC9AFFC}</Project>
       <Name>PluginsAPI</Name>
     </ProjectReference>
   </ItemGroup>

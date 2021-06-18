@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using static PluginsAPI.PluginLoader;
 
 namespace PluginsAPI
 {
@@ -76,7 +77,7 @@ namespace PluginsAPI
         public static bool LookForScript(ref string filename)
         {
             //Automatically look in subfolders and try to add ".txt" file extension
-            char dir_slash = Client.isUsingMono ? '/' : '\\';
+            char dir_slash = PluginClient.isUsingMono ? '/' : '\\';
             string[] files = new string[]
             {
                 filename,
@@ -128,9 +129,38 @@ namespace PluginsAPI
             }
             else
             {
-                UnLoadPlugin();
+                //UnLoadPlugin();
             }
 
+            //if (csharp) //C# compiled script
+            //{
+            //    //Initialize thread on first update
+            //    if (thread == null)
+            //    {
+            //        thread = new Thread(() =>
+            //        {
+            //            //try
+            //            //{
+            //                PluginLoader.Run(this, lines, args, localVars);
+            //            //}
+            //            //catch (CSharpException e)
+            //            //{
+            //            //    Console.WriteLine("Ошибка бота");
+            //            //}
+            //        });
+            //        thread.Name = "Plugin Script - " + file;
+            //        thread.Start();
+            //    }
+            //
+            //    //Unload bot once the thread has finished running
+            //    if (thread != null && !thread.IsAlive)
+            //    {
+            //       //UnLoadPlugin();
+            //    }
+            //}
+        }
+        public override void Update()
+        {
             if (csharp) //C# compiled script
             {
                 //Initialize thread on first update
@@ -138,23 +168,18 @@ namespace PluginsAPI
                 {
                     thread = new Thread(() =>
                     {
-                        //try
-                        //{
+
                             PluginLoader.Run(this, lines, args, localVars);
-                        //}
-                        //catch (CSharpException e)
-                        //{
-                        //    Console.WriteLine("Ошибка бота");
-                        //}
+                        
                     });
-                    thread.Name = "Plugin Script - " + file;
+                    thread.Name = "MCC Script - " + file;
                     thread.Start();
                 }
 
                 //Unload bot once the thread has finished running
                 if (thread != null && !thread.IsAlive)
                 {
-                    UnLoadPlugin();
+                    //UnLoadPlugin();
                 }
             }
         }

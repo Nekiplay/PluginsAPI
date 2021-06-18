@@ -7,9 +7,9 @@ namespace PluginsAPI
     {
 
         #region Системное
-        private Client _handler = null;
+        private PluginClient _handler = null;
 
-        private Client Handler
+        private PluginClient Handler
         {
             get
             {
@@ -20,7 +20,7 @@ namespace PluginsAPI
                 throw new InvalidOperationException("Error");
             }
         }
-        public void SetHandler(Client handler) { this._handler = handler; }
+        public void SetHandler(PluginClient handler) { this._handler = handler; }
         private Plugin master = null;
         protected void SetMaster(Plugin master) { this.master = master; }
         #endregion
@@ -52,13 +52,17 @@ namespace PluginsAPI
         #region Ивенты плагина
 
         public virtual void Initialize() { }
+
+        public virtual void Update() { }
+
+        public virtual void ReceivedObject(object s) { }
         #endregion
 
         #region Методы плагина
 
         protected void PluginPostObject(object obj)
         {
-            Handler.PluginPostObject(obj);
+            Handler.OnPluginPostObjectMethod(obj);
         }
         #endregion
     }

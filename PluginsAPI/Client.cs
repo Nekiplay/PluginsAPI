@@ -1,19 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
 namespace PluginsAPI
 {
-    public class Client
+    public class PluginClient
     {
+        Thread netRead; // main thread
+        public PluginClient()
+        {
+            StartUpdating();
+        }
+
+        private void StartUpdating()
+        {
+            netRead = new Thread(new ThreadStart(Updater));
+            netRead.Name = "PacketHandler";
+            netRead.Start();
+        }
         private readonly Dictionary<string, List<Plugin>> registeredPluginsPluginChannels = new Dictionary<string, List<Plugin>>();
         private readonly List<Plugin> plugins = new List<Plugin>();
-        public Action OnUnloadPlugin { set; get; }
+
+        #region Системное
+        public static bool isUsingMono
+        {
+            get
+            {
+                return Type.GetType("Mono.Runtime") != null;
+            }
+        }
+        private void Updater()
+        {
+            try
+            {
+                bool keepUpdating = true;
+                Stopwatch stopWatch = new Stopwatch();
+                while (keepUpdating)
+                {
+                    stopWatch.Start();
+                    keepUpdating = Update();
+                    stopWatch.Stop();
+                    int elapsed = stopWatch.Elapsed.Milliseconds;
+                    stopWatch.Reset();
+                    if (elapsed < 100)
+                        Thread.Sleep(100 - elapsed);
+                }
+            }
+            catch (System.IO.IOException) { }
+            catch (ObjectDisposedException) { }
+        }
+        private bool Update()
+        {
+            try
+            {
+                OnUpdate();
+
+            }
+            catch (System.IO.IOException) { return false; }
+            catch (NullReferenceException) { return false; }
+            return true;
+        }
+        public void OnUpdate()
+        {
+            foreach (Plugin bot in plugins.ToArray())
+            {
+                try
+                {
+                    bot.Update();
+                }
+                catch { }
+            }
+        }
+        #endregion
 
         #region Получение и отправка данных от плагина
+        public Action OnUnloadPlugin { set; get; }
         public Action<object> OnPluginPostObject { set; get; }
-        public void PluginPostObject(object ob)
+        public void OnPluginPostObjectMethod(object ob)
         {
             if (OnPluginPostObject != null)
             {
@@ -30,7 +95,21 @@ namespace PluginsAPI
             plugins.Add(b);
             if (init)
             {
-                DispatchPluginEvent(bot => bot.Initialize(), new Plugin[] { b });
+                List<Plugin> temp = new List<Plugin>();
+                temp.Add(b);
+                //new Plugin[] { b }
+                DispatchPluginEvent(bot => bot.Initialize(), temp);
+            }
+        }
+        public void PluginPostObject(Plugin b, object obj)
+        {
+            foreach (Plugin bot in plugins.ToArray())
+            {
+                try
+                {
+                    bot.ReceivedObject(obj);
+                }
+                catch { }
             }
         }
         public void PluginUnLoad(Plugin b)
@@ -41,16 +120,6 @@ namespace PluginsAPI
             foreach (var entry in botRegistrations)
             {
                 UnregisterPluginChannel(entry.Key, b);
-            }
-        }
-        #endregion
-
-        #region Системное
-        public static bool isUsingMono
-        {
-            get
-            {
-                return Type.GetType("Mono.Runtime") != null;
             }
         }
         #endregion
@@ -74,6 +143,7 @@ namespace PluginsAPI
                 try
                 {
                     action(bot);
+                    //Console.WriteLine("Выполнил: " + action.Method);
                 }
                 catch (Exception e)
                 {
