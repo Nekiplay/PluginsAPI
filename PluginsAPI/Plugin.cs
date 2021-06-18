@@ -6,6 +6,7 @@ namespace PluginsAPI
     public abstract class Plugin
     {
         private Client _handler = null;
+        
         private Client Handler
         {
             get

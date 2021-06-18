@@ -98,7 +98,6 @@ namespace PluginsAPI
                     parameters.CompilerOptions = "/t:library";
                     parameters.GenerateInMemory = true;
                     parameters.ReferencedAssemblies.AddRange(dlls.ToArray());
-                    //Console.WriteLine(code);
                     CompilerResults result = compiler.CompileAssemblyFromSource(parameters, code);
 
                     for (int i = 0; i < result.Errors.Count; i++)

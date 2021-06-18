@@ -13,8 +13,6 @@ namespace PluginsAPI
         private string[] lines = new string[0];
         private string[] args = new string[0];
         private int sleepticks = 10;
-        private int nextline = 0;
-        private string owner;
         private bool csharp;
         private Thread thread;
         private Dictionary<string, object> localVars;
@@ -27,7 +25,6 @@ namespace PluginsAPI
         public Script(string filename, string ownername, Dictionary<string, object> localVars)
             : this(filename)
         {
-            this.owner = ownername;
             this.localVars = localVars;
         }
 
