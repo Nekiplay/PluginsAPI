@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using static PluginsAPI.PluginLoader;
 
-namespace PluginsAPI.Plugins
+namespace PluginsAPI
 {
     public class Script : Plugin
     {
