@@ -13,7 +13,14 @@ namespace PluginsAPI
         {
             StartUpdating();
         }
-
+        public void Quit()
+        {
+            netRead = null;
+            foreach (Plugin p in plugins)
+            {
+                PluginUnLoad(p);
+            }
+        }
         private void StartUpdating()
         {
             netRead = new Thread(new ThreadStart(Updater));

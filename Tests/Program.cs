@@ -20,7 +20,6 @@ namespace Tests
         [STAThread]
         static void Main()
         {
-            client.OnUnloadPlugin += OnPluginUnload;
             client.OnPluginPostObject += OnPluginReceivedOnject;
             client.PluginLoad(s);
             Console.ReadKey();
@@ -35,10 +34,6 @@ namespace Tests
                     client.PluginPostObject(s, "Привет плагин");
                 }
             }
-        }
-        static void OnPluginUnload()
-        {
-            Console.WriteLine("Плагин выключился");
         }
     }
 }
