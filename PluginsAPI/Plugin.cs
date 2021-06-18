@@ -27,7 +27,7 @@ namespace PluginsAPI
 
         protected void RunScript(string filename, string playername = null, Dictionary<string, object> localVars = null)
         {
-            Handler.PluginLoad(new Plugins.Script(filename, playername, localVars));
+            Handler.PluginLoad(new Script(filename, playername, localVars));
         }
 
 

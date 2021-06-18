@@ -17,7 +17,7 @@ namespace Tests
         static void Main()
         {
             Client client = new Client();
-            client.PluginLoad(new PluginsAPI.Plugins.Script(@"Test.cs"));
+            client.PluginLoad(new PluginsAPI.Script(@"Test.cs"));
             Console.ReadKey();
         }
     }
