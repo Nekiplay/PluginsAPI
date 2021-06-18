@@ -9,7 +9,21 @@ namespace PluginsAPI
     {
         private readonly Dictionary<string, List<Plugin>> registeredPluginsPluginChannels = new Dictionary<string, List<Plugin>>();
         private readonly List<Plugin> plugins = new List<Plugin>();
-        public List<Action> OnUnloadPlugin { set; get; }
+        public Action OnUnloadPlugin { set; get; }
+
+        #region Получение данных от бота
+        public Action<object> OnPluginPostObject { set; get; }
+        public void PluginPostObject(object ob)
+        {
+            if (OnPluginPostObject != null)
+            {
+                OnPluginPostObject(ob);
+            }
+        }
+
+        #endregion
+
+        #region Управление ботом
         public void PluginLoad(Plugin b, bool init = true)
         {
             b.SetHandler(this);
@@ -29,6 +43,7 @@ namespace PluginsAPI
                 UnregisterPluginChannel(entry.Key, b);
             }
         }
+        #endregion
         public static bool isUsingMono
         {
             get

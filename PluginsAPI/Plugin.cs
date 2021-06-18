@@ -26,12 +26,9 @@ namespace PluginsAPI
         {
             Handler.PluginUnLoad(bot);
 
-            if (Handler.OnUnloadPlugin != null && Handler.OnUnloadPlugin.Count != 0)
+            if (Handler.OnUnloadPlugin != null)
             {
-                foreach (Action unloadaction in Handler.OnUnloadPlugin)
-                {
-                    unloadaction();
-                }
+                Handler.OnUnloadPlugin();
             }
         }
         public void SetHandler(Client handler) { this._handler = handler; }
@@ -45,10 +42,14 @@ namespace PluginsAPI
             Handler.PluginLoad(new Script(filename, playername, localVars));
         }
 
-
         protected void UnLoadPlugin()
         {
             UnLoadPlugin(this);
+        }
+
+        protected void PluginPostObject(object obj)
+        {
+            Handler.PluginPostObject(obj);
         }
     }
 }
