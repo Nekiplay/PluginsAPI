@@ -9,7 +9,7 @@ namespace PluginsAPI
     {
         private readonly Dictionary<string, List<Plugin>> registeredPluginsPluginChannels = new Dictionary<string, List<Plugin>>();
         private readonly List<Plugin> plugins = new List<Plugin>();
-        public List<Action> OnUnloadPlugin = null;
+        public List<Action> OnUnloadPlugin = new List<Action>();
         public void PluginLoad(Plugin b, bool init = true)
         {
             b.SetHandler(this);
