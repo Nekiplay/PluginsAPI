@@ -11,7 +11,7 @@ namespace PluginsAPI
         private readonly List<Plugin> plugins = new List<Plugin>();
         public Action OnUnloadPlugin { set; get; }
 
-        #region Получение данных от бота
+        #region Получение и отправка данных от плагина
         public Action<object> OnPluginPostObject { set; get; }
         public void PluginPostObject(object ob)
         {
@@ -23,7 +23,7 @@ namespace PluginsAPI
 
         #endregion
 
-        #region Управление ботом
+        #region Управление плагином
         public void PluginLoad(Plugin b, bool init = true)
         {
             b.SetHandler(this);
@@ -44,6 +44,8 @@ namespace PluginsAPI
             }
         }
         #endregion
+
+        #region Системное
         public static bool isUsingMono
         {
             get
@@ -51,6 +53,9 @@ namespace PluginsAPI
                 return Type.GetType("Mono.Runtime") != null;
             }
         }
+        #endregion
+
+        #region Регистрация плагинов
         private void DispatchPluginEvent(Action<Plugin> action, IEnumerable<Plugin> botList = null)
         {
             Plugin[] selectedBots;
@@ -86,7 +91,7 @@ namespace PluginsAPI
                 }
             }
         }
-        
+
         public void UnregisterPluginChannel(string channel, Plugin bot)
         {
             if (registeredPluginsPluginChannels.ContainsKey(channel))
@@ -99,5 +104,6 @@ namespace PluginsAPI
                 }
             }
         }
+        #endregion
     }
 }

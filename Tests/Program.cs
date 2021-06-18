@@ -18,7 +18,7 @@ namespace Tests
         static void Main()
         {
             Client client = new Client();
-            client.OnUnloadPlugin += Unload;
+            client.OnUnloadPlugin += OnPluginUnload;
             client.PluginLoad(new Script(@"Test.cs"));
             client.OnPluginPostObject += OnPluginReceivedOnject;
             Console.ReadKey();
@@ -27,10 +27,10 @@ namespace Tests
         {
             if (obj.GetType() == typeof(string))
             {
-                    Console.WriteLine(obj);
+                Console.WriteLine(obj);
             }
         }
-        static void Unload()
+        static void OnPluginUnload()
         {
             Console.WriteLine("Плагин выключился");
         }
