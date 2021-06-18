@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PluginsAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace Tests
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Client client = new Client();
+            client.PluginLoad(new PluginsAPI.Plugins.Script(@"Test.cs"));
+            Console.ReadKey();
         }
     }
 }
