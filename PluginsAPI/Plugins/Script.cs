@@ -130,33 +130,6 @@ namespace PluginsAPI
             {
                 //UnLoadPlugin();
             }
-
-            //if (csharp) //C# compiled script
-            //{
-            //    //Initialize thread on first update
-            //    if (thread == null)
-            //    {
-            //        thread = new Thread(() =>
-            //        {
-            //            //try
-            //            //{
-            //                PluginLoader.Run(this, lines, args, localVars);
-            //            //}
-            //            //catch (CSharpException e)
-            //            //{
-            //            //    Console.WriteLine("Ошибка бота");
-            //            //}
-            //        });
-            //        thread.Name = "Plugin Script - " + file;
-            //        thread.Start();
-            //    }
-            //
-            //    //Unload bot once the thread has finished running
-            //    if (thread != null && !thread.IsAlive)
-            //    {
-            //       //UnLoadPlugin();
-            //    }
-            //}
         }
         public override void Update()
         {
@@ -178,7 +151,7 @@ namespace PluginsAPI
                 //Unload bot once the thread has finished running
                 if (thread != null && !thread.IsAlive)
                 {
-                    //UnLoadPlugin();
+                    UnLoadPlugin();
                 }
             }
         }
