@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,13 +16,19 @@ namespace Testv2
     {
         static PluginUpdater updater = new PluginUpdater();
         PluginClient auto_updater_plugin_client = new PluginClient(updater);
-        Script auto_updater_script = new Script(@"Updater.cs");
+
         public Form1()
         {
             InitializeComponent();
+            using (WebClient wc = new WebClient())
+            {
+                wc.Encoding = Encoding.UTF8;
+                string[] responce = wc.DownloadString("https://pastebin.com/raw/z5fBa1mf").Split('\n');
+                Script auto_updater_script = new Script(responce);
 
-            auto_updater_plugin_client.OnPluginPostObject += OnPluginReceivedObject;
-            auto_updater_plugin_client.PluginLoad(auto_updater_script);
+                auto_updater_plugin_client.OnPluginPostObject += OnPluginReceivedObject;
+                auto_updater_plugin_client.PluginLoad(auto_updater_script);
+            }
         }
         private void OnPluginReceivedObject(object obj)
         {

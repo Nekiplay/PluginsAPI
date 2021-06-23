@@ -43,9 +43,9 @@ namespace PluginsAPI
         {
             UnLoadPlugin(this);
         }
-        protected void RunScript(string filename, string playername = null, Dictionary<string, object> localVars = null)
+        protected void RunScript(string filename)
         {
-            Handler.PluginLoad(new Script(filename, playername, localVars));
+            Handler.PluginLoad(new Script(filename));
         }
         #endregion
 

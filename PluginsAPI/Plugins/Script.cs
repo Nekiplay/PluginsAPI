@@ -10,22 +10,16 @@ namespace PluginsAPI
 {
     public class Script : Plugin
     {
-        private string file;
+        private string file = "";
         private string[] lines = new string[0];
         private string[] args = new string[0];
         private bool csharp;
         private Thread thread;
-        private Dictionary<string, object> localVars;
+        private Dictionary<string, object> localVars = new Dictionary<string, object>();
 
         public Script(string filename)
         {
             ParseArguments(filename);
-        }
-
-        public Script(string filename, string ownername, Dictionary<string, object> localVars)
-            : this(filename)
-        {
-            this.localVars = localVars;
         }
 
         private void ParseArguments(string argstr)
@@ -114,21 +108,16 @@ namespace PluginsAPI
 
         public override void Initialize()
         {
-            //Load the given file from the startup parameters
             if (LookForScript(ref file))
             {
                 lines = System.IO.File.ReadAllLines(file, Encoding.UTF8);
-                //foreach (string l in lines)
-                //{
-                //    Console.WriteLine(l);
-                //}
                 csharp = file.EndsWith(".cs");
                 thread = null;
 
             }
             else
             {
-                //UnLoadPlugin();
+                UnLoadPlugin();
             }
         }
         public override void Update()
@@ -140,9 +129,7 @@ namespace PluginsAPI
                 {
                     thread = new Thread(() =>
                     {
-
-                            PluginLoader.Run(this, lines, args, localVars);
-                        
+                        Run(this, lines, args, localVars);
                     });
                     thread.Name = "MCC Script - " + file;
                     thread.Start();
