@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginsAPI", "PluginsAPI\PluginsAPI.csproj", "{02DE83C5-407D-4F2E-92A9-F4D86EC9AFFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacrosAPI", "PluginsAPI\MacrosAPI.csproj", "{02DE83C5-407D-4F2E-92A9-F4D86EC9AFFC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{77E80568-7A6B-4F1E-90BE-056F60CC2095}"
 EndProject

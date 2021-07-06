@@ -12,28 +12,46 @@ namespace Tests
 {
     static class Program
     {
-        static PluginUpdater updater = new PluginUpdater();
-        static PluginClient test_plugin_client = new PluginClient(updater);
-        static Script s = new Script(@"Test.cs");
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            test_plugin_client.OnPluginPostObject += OnPluginReceivedObject;
-            test_plugin_client.PluginLoad(s);
+            PluginUpdater pluginUpdater = new PluginUpdater();
+            PluginClient pluginClient = new PluginClient(pluginUpdater);
+            AutoClicker auto = new AutoClicker();
+            pluginClient.PluginLoad(auto);
             Console.ReadKey();
         }
-        static void OnPluginReceivedObject(object obj)
+    }
+
+    public class AutoClicker : Plugin
+    {
+        public override void Update()
         {
-            if (obj.GetType() == typeof(string))
+            if (IsKeyPressed(Keys.XButton2))
             {
-                if (obj == "Привет я плагин")
+                for (int i = 0; i < 20; i++)
                 {
-                    Console.WriteLine(obj);
-                    test_plugin_client.PluginPostObject(s, "Привет плагин");
-                    updater.Stop();
+                    if (IsKeyPressed(Keys.XButton2))
+                    {
+                        LeftClick();
+                        Thread.Sleep(50);
+                    }
+                    else { break; }
+                }
+            }
+            if (IsKeyPressed(Keys.XButton2))
+            {
+                for (int i = 0; i < 30; i++)
+                {
+                    if (IsKeyPressed(Keys.XButton2))
+                    {
+                        LeftClick();
+                        Thread.Sleep(60);
+                    }
+                    else { break; }
                 }
             }
         }

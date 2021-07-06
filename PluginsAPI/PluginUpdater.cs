@@ -47,9 +47,9 @@ namespace PluginsAPI
                     stopWatch.Stop();
                     int elapsed = stopWatch.Elapsed.Milliseconds;
                     stopWatch.Reset();
-                    if (elapsed < 100)
+                    if (elapsed < 1)
                     {
-                        Thread.Sleep(100 - elapsed);
+                        Thread.Sleep(1 - elapsed);
                     }
                 }
             }

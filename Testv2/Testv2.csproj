@@ -80,9 +80,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PluginsAPI\PluginsAPI.csproj">
+    <ProjectReference Include="..\PluginsAPI\MacrosAPI.csproj">
       <Project>{02de83c5-407d-4f2e-92a9-f4d86ec9affc}</Project>
-      <Name>PluginsAPI</Name>
+      <Name>MacrosAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
