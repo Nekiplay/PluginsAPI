@@ -66,7 +66,7 @@ namespace PluginsAPI
             }
             else file = "";
         }
-
+        //
         public static bool LookForScript(ref string filename)
         {
             //Automatically look in subfolders and try to add ".txt" file extension
