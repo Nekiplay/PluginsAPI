@@ -30,30 +30,7 @@ namespace Tests
     {
         public override void Update()
         {
-            if (IsKeyPressed(Keys.XButton2))
-            {
-                for (int i = 0; i < 20; i++)
-                {
-                    if (IsKeyPressed(Keys.XButton2))
-                    {
-                        LeftClick();
-                        Thread.Sleep(50);
-                    }
-                    else { break; }
-                }
-            }
-            if (IsKeyPressed(Keys.XButton2))
-            {
-                for (int i = 0; i < 30; i++)
-                {
-                    if (IsKeyPressed(Keys.XButton2))
-                    {
-                        LeftClick();
-                        Thread.Sleep(60);
-                    }
-                    else { break; }
-                }
-            }
+
         }
     }
 }
