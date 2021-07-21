@@ -111,7 +111,7 @@ namespace PluginsAPI
             if (LookForScript(ref file))
             {
                 lines = System.IO.File.ReadAllLines(file, Encoding.UTF8);
-                csharp = file.EndsWith(".cs");
+                csharp = true;
                 thread = null;
 
             }

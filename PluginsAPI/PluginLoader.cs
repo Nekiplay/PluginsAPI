@@ -124,7 +124,7 @@ namespace PluginsAPI
                         .GetType()
                         .GetMethod("__run")
                         .Invoke(compiledScript,
-                            new object[] { new CSharpAPI(apiHandler, localVars), args });
+                            new object[] { new CSharpAPI(apiHandler), args });
                 }
                 catch (Exception e) { throw new CSharpException(CSErrorType.RuntimeError, e); }
             }
@@ -163,7 +163,7 @@ namespace PluginsAPI
     }
     public class CSharpAPI : Plugin
     {
-        public CSharpAPI(Plugin apiHandler, Dictionary<string, object> localVars)
+        public CSharpAPI(Plugin apiHandler)
         {
             SetMaster(apiHandler);
         }

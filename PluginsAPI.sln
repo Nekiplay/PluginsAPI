@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginsAPI", "PluginsAPI\Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{77E80568-7A6B-4F1E-90BE-056F60CC2095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testv2", "Testv2\Testv2.csproj", "{0217B821-DC52-4E42-9F0D-411B00370E53}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{77E80568-7A6B-4F1E-90BE-056F60CC2095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77E80568-7A6B-4F1E-90BE-056F60CC2095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77E80568-7A6B-4F1E-90BE-056F60CC2095}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0217B821-DC52-4E42-9F0D-411B00370E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0217B821-DC52-4E42-9F0D-411B00370E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0217B821-DC52-4E42-9F0D-411B00370E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0217B821-DC52-4E42-9F0D-411B00370E53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

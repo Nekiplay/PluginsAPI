@@ -46,6 +46,7 @@
     <Compile Include="PluginClient.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Plugins\Script.cs" />
+    <Compile Include="Plugins\WebScript.cs" />
     <Compile Include="PluginUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
