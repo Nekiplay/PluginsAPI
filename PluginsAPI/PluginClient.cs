@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
@@ -112,18 +111,14 @@ namespace PluginsAPI
                 try
                 {
                     action(bot);
-                    //Console.WriteLine("Выполнил: " + action.Method);
                 }
                 catch (Exception e)
                 {
                     if (!(e is ThreadAbortException))
                     {
-                        //Retrieve parent method name to determine which event caused the exception
                         System.Diagnostics.StackFrame frame = new System.Diagnostics.StackFrame(1);
                         System.Reflection.MethodBase method = frame.GetMethod();
                         string parentMethodName = method.Name;
-
-                        //Display a meaningful error message to help debugging the ChatBot
                         Console.WriteLine(parentMethodName + ": Got error from " + bot.ToString() + ": " + e.ToString());
                     }
                     else throw;

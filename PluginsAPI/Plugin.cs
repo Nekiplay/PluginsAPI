@@ -58,6 +58,8 @@ namespace PluginsAPI
         public virtual void Update() { }
 
         public virtual void ReceivedObject(object s) { }
+
+        public virtual void ReceivedObject<T>(T s) { }
         #endregion
 
         #region Методы плагина
