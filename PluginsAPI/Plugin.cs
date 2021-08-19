@@ -36,9 +36,9 @@ namespace PluginsAPI
         {
             Handler.PluginUnLoad(bot);
 
-            if (Handler.OnUnloadPlugin != null)
+            if (Handler.OnPluginUnload != null)
             {
-                Handler.OnUnloadPlugin();
+                Handler.OnPluginUnload();
             }
         }
         protected void UnLoadPlugin()

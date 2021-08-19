@@ -44,8 +44,9 @@ namespace PluginsAPI
         #endregion
 
         #region Получение и отправка данных от плагина
-        public Action OnUnloadPlugin { set; get; }
+        public Action OnPluginUnload { set; get; }
         public Action<object> OnPluginPostObject { set; get; }
+        public Action OnPluginLoad { set; get; }
         public void OnPluginPostObjectMethod(object ob)
         {
             if (OnPluginPostObject != null)
@@ -67,6 +68,11 @@ namespace PluginsAPI
                 temp.Add(b);
                 //new Plugin[] { b }
                 DispatchPluginEvent(bot => bot.Initialize(), temp);
+
+                if (OnPluginLoad != null)
+                {
+                    OnPluginLoad();
+                }
             }
         }
         public void PluginPostObject(Plugin b, object obj)
