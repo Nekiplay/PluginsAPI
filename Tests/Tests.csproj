@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tests</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,6 +60,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -75,7 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PluginsAPI\PluginsAPI.csproj">
-      <Project>{02DE83C5-407D-4F2E-92A9-F4D86EC9AFFC}</Project>
+      <Project>{02de83c5-407d-4f2e-92a9-f4d86ec9affc}</Project>
       <Name>PluginsAPI</Name>
     </ProjectReference>
   </ItemGroup>

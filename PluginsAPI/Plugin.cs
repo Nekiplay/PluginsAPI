@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace PluginsAPI
 {
@@ -32,13 +29,13 @@ namespace PluginsAPI
         { 
             Handler.PluginUnLoad(bot); Handler.PluginLoad(bot);
         }
-        protected void UnLoadPlugin(Plugin bot)
+        protected void UnLoadPlugin(Plugin plugin)
         {
-            Handler.PluginUnLoad(bot);
+            Handler.PluginUnLoad(plugin);
 
             if (Handler.OnPluginUnload != null)
             {
-                Handler.OnPluginUnload();
+                Handler.OnPluginUnload(plugin);
             }
         }
         protected void UnLoadPlugin()
@@ -66,7 +63,7 @@ namespace PluginsAPI
 
         protected void PluginPostObject(object obj)
         {
-            Handler.OnPluginPostObjectMethod(obj);
+            Handler.OnPluginPostObjectMethod(this, obj);
         }
         #endregion
     }
